@@ -1,0 +1,14 @@
+name: Keep Streamlit App Awake
+
+on:
+  schedule:
+    # This triggers the script every 4 hours automatically
+    - cron: "0 */4 * * *"
+  workflow_dispatch: # This allows you to manually trigger a ping whenever you want
+
+jobs:
+  ping-app:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Ping Request to Streamlit Server
+        run: curl -s -o /dev/null -w "%{http_code}\n" https://graminsetu-bharat.streamlit.app/
